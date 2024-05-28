@@ -18,7 +18,7 @@ const ActivityPage: React.FC = () => {
                 title="Title"
                 hasBottomLine={false}
             />
-            <div style={{ padding: '20px' }}>
+            <div style={styles.page}>
                 <ActivityList />
             </div>
         </>
@@ -28,17 +28,12 @@ const ActivityPage: React.FC = () => {
 const ActivityList: React.FC = () => {
     const activities = [
         {
-            imageSrc: "https://via.placeholder.com/60",
+            imageSrc: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRfWrLOTDrl80mHW8uAtI6amaE1blo_IdKi73R69yhzaqoAOSe0nywrGHaHOdFMXFbVdwBUSVnW18BatgVxDnM7bTVQ763oprFVnjJs_-ZUAEsLJq48NdOsFQ&usqp=CAc",
             title: "活动标题1",
             description: "这是活动的描述信息1。"
         },
         {
-            imageSrc: "https://via.placeholder.com/60",
-            title: "活动标题2",
-            description: "这是活动的描述信息2。"
-        },
-        {
-            imageSrc: "https://via.placeholder.com/60",
+            imageSrc: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRfWrLOTDrl80mHW8uAtI6amaE1blo_IdKi73R69yhzaqoAOSe0nywrGHaHOdFMXFbVdwBUSVnW18BatgVxDnM7bTVQ763oprFVnjJs_-ZUAEsLJq48NdOsFQ&usqp=CAc",
             title: "活动标题2",
             description: "这是活动的描述信息2。"
         }
@@ -59,10 +54,18 @@ const ActivityList: React.FC = () => {
 };
 
 const styles = {
+    page: {
+        padding: '0', // 移除多余的填充
+        width: '100%', // 确保页面占据整个宽度
+        boxSizing: 'border-box',
+    },
     list: {
         display: 'flex',
         flexDirection: 'column',
-        gap: '10px' // 调整卡片之间的间距
+        gap: '10px', // 调整卡片之间的间距
+        width: '100%', // 确保列表占据父容器的全部宽度
+        padding: '10px 20px', // 确保左右有一些间距
+        boxSizing: 'border-box',
     }
 };
 
