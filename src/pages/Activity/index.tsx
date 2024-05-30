@@ -33,7 +33,7 @@ const ActivityPage: React.FC = () => {
             <div style={styles.page}>
                 <ActivityList onCardClick={handleCardClick} />
             </div>
-            <PopupSwiper visible={popupVisible} close={() => setPopupVisible(false)} direction="bottom" allowSwipeDirections={["down"]}>
+            <PopupSwiper visible={popupVisible} close={() => setPopupVisible(false)} direction="bottom" allowSwipeDirections={["down" as never]}>
                 <div style={styles.popupContent}>
                     {selectedActivity && (
                         <>
