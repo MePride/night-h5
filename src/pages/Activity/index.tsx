@@ -13,7 +13,7 @@ interface Activity {
 }
 
 const ActivityPage: React.FC = () => {
-    const navBarRef = useRef<null | HTMLDivElement>(null);
+    const navBarRef = useRef<never>(null); // 使用 any 类型
     const [popupVisible, setPopupVisible] = useState(false);
     const [selectedActivity, setSelectedActivity] = useState<Activity | null>(null);
 

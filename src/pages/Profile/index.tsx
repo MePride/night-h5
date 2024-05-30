@@ -6,7 +6,7 @@ import setRootPixel from '@arco-design/mobile-react/tools/flexible';
 setRootPixel();
 
 const ProfilePage: React.FC = () => {
-    const navBarRef = React.useRef<null | HTMLDivElement>(null);
+    const navBarRef = React.useRef<never>(null); // 使用 any 类型
 
     return (
         <>
