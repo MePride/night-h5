@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import ActivityPage from './pages/Activity/index';
+import ProfilePage from './pages/Profile/index';
 
 function Home() {
     const [count, setCount] = useState(0);
@@ -44,6 +45,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/activity" element={<ActivityPage />} />
+                <Route path="/profile" element={<ProfilePage />} />
             </Routes>
         </Router>
     );

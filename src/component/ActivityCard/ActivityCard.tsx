@@ -1,5 +1,4 @@
-import React from 'react';
-import { Button } from '@arco-design/mobile-react';
+import React, { useState } from 'react';
 import '@arco-design/mobile-react/dist/style.css'; // 确保正确导入样式
 
 interface ActivityCardProps {
@@ -9,8 +8,28 @@ interface ActivityCardProps {
 }
 
 const ActivityCard: React.FC<ActivityCardProps> = ({ imageSrc, title, description }) => {
+    const [isPressed, setIsPressed] = useState(false);
+
+    const handleMouseDown = () => {
+        setIsPressed(true);
+    };
+
+    const handleMouseUp = () => {
+        setIsPressed(false);
+    };
+
     return (
-        <div style={styles.card}>
+        <div
+            style={{
+                ...styles.card,
+                ...(isPressed ? styles.cardPressed : {}),
+            }}
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp} // 防止鼠标离开时状态未重置
+            onTouchStart={handleMouseDown} // 支持触摸事件
+            onTouchEnd={handleMouseUp} // 支持触摸事件
+        >
             <div style={styles.imageContainer}>
                 <img src={imageSrc} alt={title} style={styles.image} />
             </div>
@@ -32,7 +51,12 @@ const styles: { [key: string]: React.CSSProperties } = {
         marginBottom: '10px',
         backgroundColor: '#fff',
         width: '100%', // 确保卡片占据父容器的全部宽度
-        boxSizing: 'border-box' // 包括 padding 和 border 在内的宽度和高度计算
+        boxSizing: 'border-box', // 包括 padding 和 border 在内的宽度和高度计算
+        transition: 'transform 0.1s ease, box-shadow 0.1s ease', // 添加过渡效果
+    },
+    cardPressed: {
+        transform: 'scale(0.98)', // 缩小
+        boxShadow: '0 6px 10px rgba(0, 0, 0, 0.2)', // 加重阴影
     },
     imageContainer: {
         width: '80px',
