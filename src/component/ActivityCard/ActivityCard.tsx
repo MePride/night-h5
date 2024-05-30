@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import '@arco-design/mobile-react/dist/style.css'; // 确保正确导入样式
+import '@arco-design/mobile-react/dist/style.css'; // Ensure styles are imported
 
 interface ActivityCardProps {
     imageSrc: string;
     title: string;
     description: string;
+    onClick: () => void;
 }
 
-const ActivityCard: React.FC<ActivityCardProps> = ({ imageSrc, title, description }) => {
+const ActivityCard: React.FC<ActivityCardProps> = ({ imageSrc, title, description, onClick }) => {
     const [isPressed, setIsPressed] = useState(false);
 
     const handleMouseDown = () => {
@@ -26,9 +27,10 @@ const ActivityCard: React.FC<ActivityCardProps> = ({ imageSrc, title, descriptio
             }}
             onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseUp} // 防止鼠标离开时状态未重置
-            onTouchStart={handleMouseDown} // 支持触摸事件
-            onTouchEnd={handleMouseUp} // 支持触摸事件
+            onMouseLeave={handleMouseUp} // Prevent state from not resetting when the mouse leaves
+            onTouchStart={handleMouseDown} // Support touch events
+            onTouchEnd={handleMouseUp} // Support touch events
+            onClick={onClick} // Trigger onClick handler
         >
             <div style={styles.imageContainer}>
                 <img src={imageSrc} alt={title} style={styles.image} />
@@ -44,19 +46,19 @@ const ActivityCard: React.FC<ActivityCardProps> = ({ imageSrc, title, descriptio
 const styles: { [key: string]: React.CSSProperties } = {
     card: {
         display: 'flex',
-        alignItems: 'flex-start', // 修改此处
+        alignItems: 'flex-start',
         padding: '10px',
-        borderRadius: '12px', // 圆角边框
-        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // iOS风格的阴影
+        borderRadius: '12px',
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
         marginBottom: '10px',
         backgroundColor: '#fff',
-        width: '100%', // 确保卡片占据父容器的全部宽度
-        boxSizing: 'border-box', // 包括 padding 和 border 在内的宽度和高度计算
-        transition: 'transform 0.1s ease, box-shadow 0.1s ease', // 添加过渡效果
+        width: '100%',
+        boxSizing: 'border-box',
+        transition: 'transform 0.1s ease, box-shadow 0.1s ease',
     },
     cardPressed: {
-        transform: 'scale(0.98)', // 缩小
-        boxShadow: '0 6px 10px rgba(0, 0, 0, 0.2)', // 加重阴影
+        transform: 'scale(0.98)',
+        boxShadow: '0 6px 10px rgba(0, 0, 0, 0.2)',
     },
     imageContainer: {
         width: '80px',
@@ -68,24 +70,24 @@ const styles: { [key: string]: React.CSSProperties } = {
         width: '100%',
         height: '100%',
         objectFit: 'cover',
-        borderRadius: '8px', // 图片的圆角
+        borderRadius: '8px',
     },
     content: {
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'flex-start', // 确保内容从顶部开始对齐
+        justifyContent: 'flex-start',
     },
     title: {
         fontSize: '16px',
         fontWeight: 'bold',
         marginBottom: '4px',
-        textAlign: 'left', // 显式地设置左对齐
+        textAlign: 'left',
     },
     description: {
         fontSize: '14px',
         color: '#666',
-        textAlign: 'left', // 显式地设置左对齐
+        textAlign: 'left',
     },
 };
 
