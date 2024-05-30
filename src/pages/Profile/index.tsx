@@ -6,7 +6,7 @@ import setRootPixel from '@arco-design/mobile-react/tools/flexible';
 setRootPixel();
 
 const ProfilePage: React.FC = () => {
-    const navBarRef = React.useRef(null);
+    const navBarRef = React.useRef<null | HTMLDivElement>(null);
 
     return (
         <>
@@ -34,7 +34,7 @@ const PrivacyPolicy: React.FC = () => {
     );
 }
 
-const styles = {
+const styles: { [key: string]: React.CSSProperties } = {
     page: {
         padding: '0', // 移除多余的填充
         width: '100%', // 确保页面占据整个宽度

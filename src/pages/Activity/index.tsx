@@ -6,12 +6,18 @@ import ActivityCard from "../../component/ActivityCard/ActivityCard.tsx";
 
 setRootPixel();
 
-const ActivityPage: React.FC = () => {
-    const navBarRef = useRef(null);
-    const [popupVisible, setPopupVisible] = useState(false);
-    const [selectedActivity, setSelectedActivity] = useState(null);
+interface Activity {
+    imageSrc: string;
+    title: string;
+    description: string;
+}
 
-    const handleCardClick = (activity) => {
+const ActivityPage: React.FC = () => {
+    const navBarRef = useRef<null | HTMLDivElement>(null);
+    const [popupVisible, setPopupVisible] = useState(false);
+    const [selectedActivity, setSelectedActivity] = useState<Activity | null>(null);
+
+    const handleCardClick = (activity: Activity) => {
         setSelectedActivity(activity);
         setPopupVisible(true);
     };
@@ -27,7 +33,7 @@ const ActivityPage: React.FC = () => {
             <div style={styles.page}>
                 <ActivityList onCardClick={handleCardClick} />
             </div>
-            <PopupSwiper visible={popupVisible} close={() => setPopupVisible(false)} direction="bottom">
+            <PopupSwiper visible={popupVisible} close={() => setPopupVisible(false)} direction="bottom" allowSwipeDirections={["down"]}>
                 <div style={styles.popupContent}>
                     {selectedActivity && (
                         <>
@@ -41,8 +47,12 @@ const ActivityPage: React.FC = () => {
     );
 };
 
-const ActivityList: React.FC<{ onCardClick: (activity) => void }> = ({ onCardClick }) => {
-    const activities = [
+interface ActivityListProps {
+    onCardClick: (activity: Activity) => void;
+}
+
+const ActivityList: React.FC<ActivityListProps> = ({ onCardClick }) => {
+    const activities: Activity[] = [
         {
             imageSrc: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRfWrLOTDrl80mHW8uAtI6amaE1blo_IdKi73R69yhzaqoAOSe0nywrGHaHOdFMXFbVdwBUSVnW18BatgVxDnM7bTVQ763oprFVnjJs_-ZUAEsLJq48NdOsFQ&usqp=CAc",
             title: "活动标题1",
@@ -70,7 +80,7 @@ const ActivityList: React.FC<{ onCardClick: (activity) => void }> = ({ onCardCli
     );
 };
 
-const styles = {
+const styles: { [key: string]: React.CSSProperties } = {
     background: {
         background: 'linear-gradient(to bottom right, #aaf, transparent)',
     },
